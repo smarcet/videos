@@ -1,0 +1,11 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= videos_path %>">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%=@video['title']%></li>
+  </ol>
+</nav>
+<div class="row">
+  <div class="col-md-12 col-xs-12 video-player">
+    <iframe src="https://player.zype.com/embed/<%=@video['_id'] %>.html?api_key=<%=ENV['PLAYER_KEY'] %>"/>
+  </div>
+</div>

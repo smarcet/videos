@@ -1,0 +1,31 @@
+<h1>videos</h1>
+<% @videos.in_groups_of(4, false).each do |group| %>
+<div class="row">
+<% group.each do |video| %>
+
+    <div class="col-md-3">
+      <div class="card">
+        <a href="<%= video_play_path(video['_id'].to_s) %>">
+          <img src="<%=video['thumbnails'][0]['url'] %>" class="card-img-top video-thumbnail" alt="<%=video['title'] %>"/>
+        </a>
+        <div class="card-body">
+          <h5 class="card-title"><a href="<%= video_play_path(video['_id'].to_s) %>"><%=video['title'] %></a><% if video['subscription_required']%>&nbsp;<span class="badge badge-info">Subscription Required</span><% end %></h5>
+          <p class="card-text"><%=video['short_description'] %></p>
+          <a href="<%= video_play_path(video['_id'].to_s) %>" class="btn btn-primary">Play</a>
+        </div>
+      </div>
+    </div>
+
+<% end %>
+</div>
+<% end %>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <% if @pagination.key?('previous') and not @pagination['previous'].nil? %>
+    <li class="page-item"><a class="page-link" href="<%= "/?page=#{@pagination['previous']}" %>">Previous</a></li>
+    <%end %>
+    <% if @pagination.key?('next') and not @pagination['next'].nil? %>
+    <li class="page-item"><a class="page-link" href="<%= "/?page=#{@pagination['next']}" %>">Next</a></li>
+    <%end %>
+  </ul>
+</nav>
